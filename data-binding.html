@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p v-bind:id="uuid" v-bind:class="name">{{num}}</p>
+        <p>{{ doubleNum }}</p>
+        <div v-if="loading">
+            <!-- DOM에서 해당 태그를 직접 삭제 -->
+            Loading...
+            <!-- 로그인전 로딩상태 -->
+        </div>
+        <div v-else>
+            <!-- DOM에서 해당 태그를 직접 삭제 -->
+            test user has been logged in
+            <!-- 로그인 완료시 상태 -->
+        </div>
+        <div v-show="loading">
+            <!-- DOM에서 display="none" 상태로 바꿈-->
+            Loading...
+        </div>
+        <input v-model="text" v-bind:placeholder="placeholder">
+        <p>
+            {{text}}
+        </p>
+
+    </div>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+new Vue({
+    el:'#app',
+    data: {
+        num: 10, 
+        uuid: 'abc1234',//로직에 따라 id를 부여할 때 v-bind로 태그의 id도 부여할 수 있다.
+        //화면의 텍스트값 뿐만 아니라 DOM 도 변경해줄수 있다.
+        //이전에는 querySelector 로 하나하나 찾아서 변경해줬다면
+        name: 'text-blue',
+        loading: true,
+        text: "",
+        placeholder: "기본입력"
+    },
+    computed: {
+        doubleNum: function(){
+            return this.num * 2;
+        }
+    }
+})
+</script>
